@@ -2,3 +2,11 @@
 ---
 
 @import "{{ site.theme }}";
+
+body {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+}
