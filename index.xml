@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nathan Schucher</title>
+    <link>https://nathanschucher.com/index.xml</link>
+    <description>Recent content on Nathan Schucher</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 11 Jan 2017 16:51:35 -0500</lastBuildDate>
+    <atom:link href="https://nathanschucher.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>about</title>
+      <link>https://nathanschucher.com/about/</link>
+      <pubDate>Wed, 11 Jan 2017 16:51:35 -0500</pubDate>
+      
+      <guid>https://nathanschucher.com/about/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a software developer from Toronto. I&amp;rsquo;m interested in machine learning algorithms for document reading and comprehension. I&amp;rsquo;m currently fun-employed working on personal projects: &lt;a href=&#34;https://github.com/nschuc/alternating-reader-tf&#34;&gt;machine reading models&lt;/a&gt; in TensorFlow, an &lt;a href=&#34;https://github.com/nschuc/FlockingWars&#34;&gt;arcade-style game&lt;/a&gt; in OpenGL/C++, and a &lt;a href=&#34;https://github.com/nschuc/keras-ui&#34;&gt;frontend for Keras&lt;/a&gt; in React.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>First</title>
+      <link>https://nathanschucher.com/posts/hello/</link>
+      <pubDate>Wed, 11 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nathanschucher.com/posts/hello/</guid>
+      <description>
+
+&lt;h2 id=&#34;alternating-neural-attention-reader&#34;&gt;Alternating Neural Attention Reader&lt;/h2&gt;
+
+&lt;p&gt;This a blog post about machine reading models. I have implemented a modern deep neural attentive reader architecture in TensorFlow and this is a run-down of that project.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

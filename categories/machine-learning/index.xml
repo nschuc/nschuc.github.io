@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on Nathan Schucher</title>
+    <link>https://nathanschucher.com/categories/machine-learning/index.xml</link>
+    <description>Recent content in Machine Learning on Nathan Schucher</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <atom:link href="https://nathanschucher.com/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>First</title>
+      <link>https://nathanschucher.com/posts/hello/</link>
+      <pubDate>Wed, 11 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nathanschucher.com/posts/hello/</guid>
+      <description>
+
+&lt;h2 id=&#34;alternating-neural-attention-reader&#34;&gt;Alternating Neural Attention Reader&lt;/h2&gt;
+
+&lt;p&gt;This a blog post about machine reading models. I have implemented a modern deep neural attentive reader architecture in TensorFlow and this is a run-down of that project.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
