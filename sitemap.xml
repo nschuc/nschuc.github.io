@@ -7,48 +7,14 @@
   </url>
   
   <url>
-    <loc>https://nathanschucher.com/posts/hello/</loc>
-    <lastmod>2017-01-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanschucher.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://nathanschucher.com/fixed/</loc>
     <lastmod>2017-01-11T16:51:35-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://nathanschucher.com/categories/machine-learning/</loc>
-    <lastmod>2017-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nathanschucher.com/categories/machine-reading/</loc>
-    <lastmod>2017-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://nathanschucher.com/</loc>
     <lastmod>2017-01-11T16:51:35-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nathanschucher.com/posts/</loc>
-    <lastmod>2017-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://nathanschucher.com/categories/tensorflow/</loc>
-    <lastmod>2017-01-11T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
