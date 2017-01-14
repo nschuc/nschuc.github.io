@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="I make things with code some of the time">
+
+<base href="https://nathanschucher.com/">
+<title>
+
+
+     alternating attentive reader 
+
+</title>
+<link rel="canonical" href="https://nathanschucher.com/blog/alternating-attentive-reader/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/nathanschucher.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+<link href="https://fonts.googleapis.com/css?family=Cormorant:500|Lato" rel="stylesheet">
+
+
+
+
+    
+    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1484384206">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1484384206">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1484384206">
+    
+        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1484384206">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://nathanschucher.com/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+              <div class="avatar-container">
+                <a href="https://nathanschucher.com/"><img class="avatar" src="https://nathanschucher.com/img/profile.jpg" /></a>
+              </div>
+            
+            <nav>
+                <a href="https://nathanschucher.com/"><div class="name">Nathan Schucher</div></a>
+                
+                <h3 class="self-intro">look at this guy, drinking his coffee; who does he think he is</h3>
+                
+                <ul>
+                    <a href="https://nathanschucher.com/blog/"><li>Blog</li></a>
+                    <a href="https://nathanschucher.com/about/"><li>About</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/nschuc" target="_blank"><img class="icon" src="https://nathanschucher.com/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/nschucher" target="_blank"><img class="icon" src="https://nathanschucher.com/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+            <a href="//www.linkedin.com/in/nathan-schucher-89905460" target="_blank"><img class="icon" src="https://nathanschucher.com/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://nathanschucher.com/index.xml"><img class="icon" src="https://nathanschucher.com/img/rss.svg" alt="rss" /></a>
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    alternating attentive reader
+
+</div>
+
+                    <div class="initials"><a href="https://nathanschucher.com/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Wed Jan 11 2017 16:31:57 EST">Jan 11, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><em>March 15th 2036</em>: You sit with your child of four years, reading Rudyard Kipling’s The Jungle Book. After reading precisely 20 sentences of the story the child turns its face to you and says:</p>
+
+<p>“Please caregiver, tell me what X represents in this sentence, ‘Yes,’ said X, ‘all the jungle fear Bagheera&ndash;all except Mowgli.’”</p>
+
+<p>The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you know. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.</p>
+
+<h2 id="iterative-alternating-neural-attention-for-machine-reading">Iterative Alternating Neural Attention for Machine Reading</h2>
+
+<p>This summer I decided to get my hands dirty and implement one of the papers I had been reading. I picked a <a href="https://arxiv.org/abs/1606.02245">paper</a> written by researchers at <a href="https://mila.umontreal.ca/">UdeM</a> and a startup in Montreal called Maluuba (<a href="http://www.maluuba.com/blog/2017/1/13/maluuba-microsoft">recently acquired by microsoft</a>).</p>
+
+<p>Machine readers are models that attempt to capture the semantics of documents in order to apply them to various tasks: summarization, question answering, captioning, sentiment analysis, etc. I don&rsquo;t know a lot about classical NLP, and so I lack the background to talk about the field as a whole, but I do know a bit about deep neural networks and the approaches taken in this field.
+There are a <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">number</a> of <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">great</a> <a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">articles</a> written about <a href="http://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html">recurrent neural networks</a>, so I won&rsquo;t explain how they work here.
+In brief, RNNs are used as a way of reducing a sequence to a high dimensional vector that somehow captures the meaning of the original sequence. Geoffrey Hinton called these &lsquo;thought vectors&rsquo;, in the sense that they represent a &lsquo;thought&rsquo; in the context of a specific problem space. For example, a model for machine translation uses an RNN to compress the source sentence in language A to a vector H. This vector is typically the &lsquo;hidden&rsquo; state of the RNN. Then the same RNN &lsquo;decodes&rsquo; the vector H and outputs a token sequence in language B. More advanced networks like Google&rsquo;s <a href="https://arxiv.org/abs/1609.08144">Neural Machine Translation</a> use separate encoder and decoder networks.</p>
+
+<p>The paper I looked at uses Gated Recurrent Units (a variant of RNN) to implement an attention mechanism. Again, I won&rsquo;t go into detail about how they work but <a href="http://distill.pub/2016/augmented-rnns/">here is a fantastic interactive explanation</a>. The basic idea is that RNN learns to <em>attend</em> to certain parts of its input. This is intuitively important, in our eyes only admit a small section of sharp, focused information. We scan images and text using this attention mechanism and have learned which sections of text or images require more attention. In images, this can look like sampling (x,y) from the RNN&rsquo;s output and attending to those. For text, the RNN will produce a hidden state that has a high cosine similarity to the input if it thinks it is an important token, and low otherwise.</p>
+
+<p>The trick with this paper, is to build two attention distributions, one over the document, and one over the query. The document attention and query attention distributions represent the likelhood of each token being useful to predicting the answer. An additional novel feature is the use of iterated adjustment of these distributions. The network iterates between glimpsing at the query, and using the information gleaned to create a document glimpse. The idea being that many inference problems require more than one logical hop, called <em>glimpses</em> in the paper. These glimpses are the weighted sum of each encoded token and it&rsquo;s probabilty. That is, if the attention to token \(i\) at time step \(t\) is \(d_{i,t}\), then the <em>document glimpse</em> is</p>
+
+<p>$$\mathbf{d}_t = \sum_{i} d_{i,t} \mathbf{\tilde{d}}_{t}$$</p>
+
+<p>This intuitively made sense when I first read the paper. It constructs a linear combination of all the tokens, weighted by importance. However, in a more recent paper I was reading I discovered this is known as <em>mean-field approximation</em>. It is an alternative to sampling from the distribution, with nice properties (e.g. it is differentiable).</p>
+
+<p>In order for the network to parameterize and control these glimpses, the network maintains a <em>context</em> vector. This is the same as the thought vectors mentioned above, and is implemented again as a GRU. This controls the query and document glimpses over the iterations. Finally, the last document attention distribution is used to compute the prediction. By marginalizing over each word (words appear multiple times) we get the total likelihood of that word being the answer, and the highest probability is the network&rsquo;s prediction.</p>
+
+<h2 id="training">Training</h2>
+
+<p>Below is a picture from TensorBoard of the likelihood that the network has assigned to the correct answer. The x-axis is the probability [0,1], the y-axis is the density (ie. over the number of examples in that batch), and the z-axis is the training step. You can see as the training proceeds (from back to front), the likelihood of the answer shifts from near-zero to near one.</p>
+
+<p><img src="https://nathanschucher.com/img/answer_probability.png" alt="Likelihood of Answer vs. Time" /></p>
+
+<h2 id="story-explorer">Story Explorer</h2>
+
+<p>I&rsquo;ve loaded all the attention outputs from the test set to see what the network was doing. You can pick a story from the drop-down on the left, and drag the slider to see the distributions at each step of the iteration. The labeled answer is listed below as well as the predicted answer from each time step.</p>
+
+<div class="story" id="story-0">
+<div>
+<select></select>
+<label class="glimpse">Glimpse</label>
+<input type="range" min="1" max="8" value="1" step="1" />
+<label>Answer: <span class="answer"></span></label>
+<label>Predicted: <span class="predicted"></span></label>
+</div>
+<label>Document: </label>
+<div class="document"></div>
+<label>Query: </label>
+<div class="query"></div>
+</div>
+
+<h2 id="what-s-next">What&rsquo;s next</h2>
+
+<p>I want to apply this model (since it&rsquo;s already done) to the other datasets in the original paper: there is a CNN news dataset, Facebook&rsquo;s bAbI tasks, and a new huge NewsQA dataset. I&rsquo;m also interested in trying to apply <a href="https://arxiv.org/pdf/1603.08983v4.pdf">Adaptive Computation Time</a>, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism actually works.</p>
+
+                <br>
+            </div>
+            <p><a href="https://nathanschucher.com/blog/">Back to posts</a></p>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-90175355-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+  <script>renderMathInElement(document.body);</script>
+
+  <script src="https://nathanschucher.com/js/alternating.js"></script>
+
+
+</body>
+</html>
+

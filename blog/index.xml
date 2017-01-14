@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nathan Schucher</title>
-    <link>https://nathanschucher.com/index.xml</link>
-    <description>Recent content on Nathan Schucher</description>
+    <title>Blog on Nathan Schucher</title>
+    <link>https://nathanschucher.com/blog/index.xml</link>
+    <description>Recent content in Blog on Nathan Schucher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 11 Jan 2017 16:31:57 -0500</lastBuildDate>
-    <atom:link href="https://nathanschucher.com/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://nathanschucher.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>alternating attentive reader</title>
