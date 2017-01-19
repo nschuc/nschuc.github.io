@@ -43,11 +43,11 @@
 
 
     
-    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1484788055">
-    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1484788055">
-    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1484788055">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1484843953">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1484843953">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1484843953">
     
-        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1484788055">
+        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1484843953">
     
 
 
@@ -225,7 +225,9 @@ By summing over each word (words appear multiple times) we get the total likelih
 
 <p><img src="https://nathanschucher.com/img/answer_probability.png" alt="Likelihood of Answer vs. Time" /></p>
 
-<p>My implementation acheived 65% accuracy on the Children&rsquo;s Book Test (Named Entity) test set, compared to the paper&rsquo;s 68.6%. This was after ~8 epochs, after which the validation loss started to increase. There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights.</p>
+<p>My implementation acheived 65% accuracy on the Children&rsquo;s Book Test (Named Entity) test set, compared to the paper&rsquo;s 68.6%.
+This was after ~8 epochs, after which the validation loss started to increase.
+There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights, <a href="http://blog.dennybritz.com/2017/01/17/engineering-is-the-bottleneck-in-deep-learning-research/">but undoubtedly much more</a>.</p>
 
 <h2 id="what-s-next">What&rsquo;s next</h2>
 
