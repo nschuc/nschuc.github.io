@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="I make things with code some of the time">
+
+<base href="https://nathanschucher.com/">
+<title>
+
+
+     alternating neural attention for machine reading 
+
+</title>
+<link rel="canonical" href="https://nathanschucher.com/blog/alternating-neural-attention-for-machine-reading/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/nathanschucher.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+<link href="https://fonts.googleapis.com/css?family=Cormorant:500|Lato" rel="stylesheet">
+
+
+
+
+    
+    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1484788055">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1484788055">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1484788055">
+    
+        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1484788055">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://nathanschucher.com/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+              <div class="avatar-container">
+                <a href="https://nathanschucher.com/"><img class="avatar" src="https://nathanschucher.com/img/profile.jpg" /></a>
+              </div>
+            
+            <nav>
+                <a href="https://nathanschucher.com/"><div class="name">Nathan Schucher</div></a>
+                
+                <h3 class="self-intro">look at this guy, drinking his coffee, don&#39;t you want to hire him?</h3>
+                
+                <ul>
+                    <a href="https://nathanschucher.com/blog/"><li>Blog</li></a>
+                    <a href="https://nathanschucher.com/about/"><li>About</li></a>
+                    <a href="https://nathanschucher.com/resume.pdf"><li>Resume</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/nschuc" target="_blank"><img class="icon" src="https://nathanschucher.com/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/nschucher" target="_blank"><img class="icon" src="https://nathanschucher.com/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+            <a href="//www.linkedin.com/in/nathan-schucher-89905460" target="_blank"><img class="icon" src="https://nathanschucher.com/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://nathanschucher.com/index.xml"><img class="icon" src="https://nathanschucher.com/img/rss.svg" alt="rss" /></a>
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    alternating neural attention for machine reading
+
+</div>
+
+                    <div class="initials"><a href="https://nathanschucher.com/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Wed Jan 11 2017 16:31:57 EST">Jan 11, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>5 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p><em>March 15th 2036</em>: You sit with your child of four years, reading Rudyard Kipling’s The Jungle Book. After reading precisely 20 sentences of the story the child turns its face to you and says:</p>
+
+<p>“Please caregiver, tell me what X represents in this sentence, ‘Yes,’ said X, ‘all the jungle fear Bagheera&ndash;all except Mowgli.’”</p>
+
+<p>The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you know. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.</p>
+
+<h2 id="story-mode">Story Mode</h2>
+
+<p>I dumped all the attention outputs from the test set to see what the network was doing. You can pick a story from the drop-down on the left, and drag the slider to see the distributions at each step of the iteration. The labeled answer is listed below as well as the predicted answer from each time step.</p>
+
+<div class="story" id="story-0">
+<div>
+<select></select>
+<label class="glimpse">Glimpse</label>
+<input type="range" min="1" max="8" value="1" step="1" />
+<label>Answer: <span class="answer"></span></label>
+<label>Predicted: <span class="predicted"></span></label>
+</div>
+<label>Document: </label>
+<div class="document"></div>
+<label>Query: </label>
+<div class="query"></div>
+</div>
+
+<h2 id="iterative-alternating-neural-attention-for-machine-reading">Iterative Alternating Neural Attention for Machine Reading</h2>
+
+<p>I decided to get my hands dirty and implement one of the papers I had been reading. I picked a <a href="https://arxiv.org/abs/1606.02245">paper</a> written by researchers at <a href="https://mila.umontreal.ca/">UdeM</a> and a startup in Montreal called Maluuba (<a href="http://www.maluuba.com/blog/2017/1/13/maluuba-microsoft">recently acquired by microsoft</a>).</p>
+
+<p>Machine readers are models that attempt to develop some kind of document understanding in order to apply them to various tasks: summarization, question answering, captioning, sentiment analysis, etc.
+There are a <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">number</a> of <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">great</a> <a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">articles</a> written about <a href="http://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html">recurrent neural networks</a>, so I won&rsquo;t explain how they work here.</p>
+
+<h2 id="the-model">The Model</h2>
+
+<p>The model takes as input a document, and a &lsquo;cloze-style&rsquo; query which is a sentence with a word missing. The output of the model is a prediction to fill the blank in the query.</p>
+
+<h3 id="bidirectional-gru-for-encoding-the-document-and-query">Bidirectional GRU for encoding the document and query</h3>
+
+<p>The document and query are split into tokens, given a unique id, and then used to train word embeddings.
+A common use of RNNs in NLP is for collapsing a sequence into a single vector.
+We hope that this vector encodes the meaning of the sentence in some high-dimensional space such that we can do interesting things with it!
+Many papers, including this one, use bidirectional RNNs in oder to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.</p>
+
+<h3 id="attentive-query-glimpses">Attentive query glimpses</h3>
+
+<p>The encoded query vectors are used to generate a <em>glimpse</em> of the query as a whole.
+The trick with this paper, is to build two attention distributions, one over the document, and one over the query.
+The document attention and query attention distributions represent the likelhood of each token being useful to predicting the answer.
+An additional novel feature is to iteratively reconstruct query and document glimpses rather than performing a single pass.
+The network alternates between glimpsing at the query, and using the information gleaned to create a document glimpse.
+The idea being that many inference problems require more than one logical hop. Then the document glimpse at time t is defined,</p>
+
+<p>$$\mathbf{d}_t = \sum_{i} d_{i,t} \mathbf{\tilde{d}}_{t}$$</p>
+
+<p>This acts like an approximation of the expected value of this document attention distribution.
+Although it doesn&rsquo;t output samples from the distribution, it produces a new vector positioned near the mode of the attentions.
+We hope that this lets the network exploit the linear structure of the embedding space and enable these glimpse vectors to capture the most important properties of the query/document.</p>
+
+<p>In order for the network to parameterize and control these glimpses, the network maintains a <em>context</em> vector.
+This is the same as the thought vectors mentioned above, and is implemented again as a GRU.
+This controls the query and document glimpses over the iterations.
+Finally, the last document attention distribution is used to compute the prediction.
+By summing over each word (words appear multiple times) we get the total likelihood of that word being the answer, and the highest probability is the network&rsquo;s prediction.</p>
+
+<h2 id="training">Training</h2>
+
+<p>Below is a picture from TensorBoard of the likelihood that the network has assigned to the correct answer. The x-axis is the probability [0,1], the y-axis is the density (ie. over the number of examples in that batch), and the z-axis is the training step.</p>
+
+<p>You can see as the training proceeds (from back to front), the likelihood distribution for the answer shifts from near-zero to near one, demonstrating the improvement over time.</p>
+
+<p><img src="https://nathanschucher.com/img/answer_probability.png" alt="Likelihood of Answer vs. Time" /></p>
+
+<p>My implementation acheived 65% accuracy on the Children&rsquo;s Book Test (Named Entity) test set, compared to the paper&rsquo;s 68.6%. This was after ~8 epochs, after which the validation loss started to increase. There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights.</p>
+
+<h2 id="what-s-next">What&rsquo;s next</h2>
+
+<p>I want to apply this model to the other datasets in the original paper: there is a CNN news dataset, Facebook&rsquo;s bAbI tasks, and a new huge NewsQA dataset. I&rsquo;m also interested in trying to apply <a href="https://arxiv.org/abs/1603.08983">Adaptive Computation Time</a>, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism works.</p>
+
+                <br>
+            </div>
+            <p><a href="https://nathanschucher.com/blog/">Back to posts</a></p>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-90175355-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+  <script>renderMathInElement(document.body);</script>
+
+  <script src="https://nathanschucher.com/js/alternating.js"></script>
+
+
+</body>
+</html>
+

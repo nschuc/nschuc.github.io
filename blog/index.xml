@@ -10,11 +10,11 @@
     <atom:link href="https://nathanschucher.com/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>alternating attentive reader</title>
-      <link>https://nathanschucher.com/blog/alternating-attentive-reader/</link>
+      <title>alternating neural attention for machine reading</title>
+      <link>https://nathanschucher.com/blog/alternating-neural-attention-for-machine-reading/</link>
       <pubDate>Wed, 11 Jan 2017 16:31:57 -0500</pubDate>
       
-      <guid>https://nathanschucher.com/blog/alternating-attentive-reader/</guid>
+      <guid>https://nathanschucher.com/blog/alternating-neural-attention-for-machine-reading/</guid>
       <description>
 
 &lt;p&gt;&lt;em&gt;March 15th 2036&lt;/em&gt;: You sit with your child of four years, reading Rudyard Kipling’s The Jungle Book. After reading precisely 20 sentences of the story the child turns its face to you and says:&lt;/p&gt;
@@ -23,33 +23,9 @@
 
 &lt;p&gt;The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you know. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.&lt;/p&gt;
 
-&lt;h2 id=&#34;iterative-alternating-neural-attention-for-machine-reading&#34;&gt;Iterative Alternating Neural Attention for Machine Reading&lt;/h2&gt;
+&lt;h2 id=&#34;story-mode&#34;&gt;Story Mode&lt;/h2&gt;
 
-&lt;p&gt;This summer I decided to get my hands dirty and implement one of the papers I had been reading. I picked a &lt;a href=&#34;https://arxiv.org/abs/1606.02245&#34;&gt;paper&lt;/a&gt; written by researchers at &lt;a href=&#34;https://mila.umontreal.ca/&#34;&gt;UdeM&lt;/a&gt; and a startup in Montreal called Maluuba (&lt;a href=&#34;http://www.maluuba.com/blog/2017/1/13/maluuba-microsoft&#34;&gt;recently acquired by microsoft&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;Machine readers are models that attempt to capture the semantics of documents in order to apply them to various tasks: summarization, question answering, captioning, sentiment analysis, etc. I don&amp;rsquo;t know a lot about classical NLP, and so I lack the background to talk about the field as a whole, but I do know a bit about deep neural networks and the approaches taken in this field.
-There are a &lt;a href=&#34;http://colah.github.io/posts/2015-08-Understanding-LSTMs/&#34;&gt;number&lt;/a&gt; of &lt;a href=&#34;http://karpathy.github.io/2015/05/21/rnn-effectiveness/&#34;&gt;great&lt;/a&gt; &lt;a href=&#34;http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/&#34;&gt;articles&lt;/a&gt; written about &lt;a href=&#34;http://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html&#34;&gt;recurrent neural networks&lt;/a&gt;, so I won&amp;rsquo;t explain how they work here.
-In brief, RNNs are used as a way of reducing a sequence to a high dimensional vector that somehow captures the meaning of the original sequence. Geoffrey Hinton called these &amp;lsquo;thought vectors&amp;rsquo;, in the sense that they represent a &amp;lsquo;thought&amp;rsquo; in the context of a specific problem space. For example, a model for machine translation uses an RNN to compress the source sentence in language A to a vector H. This vector is typically the &amp;lsquo;hidden&amp;rsquo; state of the RNN. Then the same RNN &amp;lsquo;decodes&amp;rsquo; the vector H and outputs a token sequence in language B. More advanced networks like Google&amp;rsquo;s &lt;a href=&#34;https://arxiv.org/abs/1609.08144&#34;&gt;Neural Machine Translation&lt;/a&gt; use separate encoder and decoder networks.&lt;/p&gt;
-
-&lt;p&gt;The paper I looked at uses Gated Recurrent Units (a variant of RNN) to implement an attention mechanism. Again, I won&amp;rsquo;t go into detail about how they work but &lt;a href=&#34;http://distill.pub/2016/augmented-rnns/&#34;&gt;here is a fantastic interactive explanation&lt;/a&gt;. The basic idea is that RNN learns to &lt;em&gt;attend&lt;/em&gt; to certain parts of its input. This is intuitively important, in our eyes only admit a small section of sharp, focused information. We scan images and text using this attention mechanism and have learned which sections of text or images require more attention. In images, this can look like sampling (x,y) from the RNN&amp;rsquo;s output and attending to those. For text, the RNN will produce a hidden state that has a high cosine similarity to the input if it thinks it is an important token, and low otherwise.&lt;/p&gt;
-
-&lt;p&gt;The trick with this paper, is to build two attention distributions, one over the document, and one over the query. The document attention and query attention distributions represent the likelhood of each token being useful to predicting the answer. An additional novel feature is the use of iterated adjustment of these distributions. The network iterates between glimpsing at the query, and using the information gleaned to create a document glimpse. The idea being that many inference problems require more than one logical hop, called &lt;em&gt;glimpses&lt;/em&gt; in the paper. These glimpses are the weighted sum of each encoded token and it&amp;rsquo;s probabilty. That is, if the attention to token \(i\) at time step \(t\) is \(d_{i,t}\), then the &lt;em&gt;document glimpse&lt;/em&gt; is&lt;/p&gt;
-
-&lt;p&gt;$$\mathbf{d}_t = \sum_{i} d_{i,t} \mathbf{\tilde{d}}_{t}$$&lt;/p&gt;
-
-&lt;p&gt;This intuitively made sense when I first read the paper. It constructs a linear combination of all the tokens, weighted by importance. However, in a more recent paper I was reading I discovered this is known as &lt;em&gt;mean-field approximation&lt;/em&gt;. It is an alternative to sampling from the distribution, with nice properties (e.g. it is differentiable).&lt;/p&gt;
-
-&lt;p&gt;In order for the network to parameterize and control these glimpses, the network maintains a &lt;em&gt;context&lt;/em&gt; vector. This is the same as the thought vectors mentioned above, and is implemented again as a GRU. This controls the query and document glimpses over the iterations. Finally, the last document attention distribution is used to compute the prediction. By marginalizing over each word (words appear multiple times) we get the total likelihood of that word being the answer, and the highest probability is the network&amp;rsquo;s prediction.&lt;/p&gt;
-
-&lt;h2 id=&#34;training&#34;&gt;Training&lt;/h2&gt;
-
-&lt;p&gt;Below is a picture from TensorBoard of the likelihood that the network has assigned to the correct answer. The x-axis is the probability [0,1], the y-axis is the density (ie. over the number of examples in that batch), and the z-axis is the training step. You can see as the training proceeds (from back to front), the likelihood of the answer shifts from near-zero to near one.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://nathanschucher.com/img/answer_probability.png&#34; alt=&#34;Likelihood of Answer vs. Time&#34; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;story-explorer&#34;&gt;Story Explorer&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;ve loaded all the attention outputs from the test set to see what the network was doing. You can pick a story from the drop-down on the left, and drag the slider to see the distributions at each step of the iteration. The labeled answer is listed below as well as the predicted answer from each time step.&lt;/p&gt;
+&lt;p&gt;I dumped all the attention outputs from the test set to see what the network was doing. You can pick a story from the drop-down on the left, and drag the slider to see the distributions at each step of the iteration. The labeled answer is listed below as well as the predicted answer from each time step.&lt;/p&gt;
 
 &lt;div class=&#34;story&#34; id=&#34;story-0&#34;&gt;
 &lt;div&gt;
@@ -65,9 +41,58 @@ In brief, RNNs are used as a way of reducing a sequence to a high dimensional ve
 &lt;div class=&#34;query&#34;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
+&lt;h2 id=&#34;iterative-alternating-neural-attention-for-machine-reading&#34;&gt;Iterative Alternating Neural Attention for Machine Reading&lt;/h2&gt;
+
+&lt;p&gt;I decided to get my hands dirty and implement one of the papers I had been reading. I picked a &lt;a href=&#34;https://arxiv.org/abs/1606.02245&#34;&gt;paper&lt;/a&gt; written by researchers at &lt;a href=&#34;https://mila.umontreal.ca/&#34;&gt;UdeM&lt;/a&gt; and a startup in Montreal called Maluuba (&lt;a href=&#34;http://www.maluuba.com/blog/2017/1/13/maluuba-microsoft&#34;&gt;recently acquired by microsoft&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Machine readers are models that attempt to develop some kind of document understanding in order to apply them to various tasks: summarization, question answering, captioning, sentiment analysis, etc.
+There are a &lt;a href=&#34;http://colah.github.io/posts/2015-08-Understanding-LSTMs/&#34;&gt;number&lt;/a&gt; of &lt;a href=&#34;http://karpathy.github.io/2015/05/21/rnn-effectiveness/&#34;&gt;great&lt;/a&gt; &lt;a href=&#34;http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/&#34;&gt;articles&lt;/a&gt; written about &lt;a href=&#34;http://r2rt.com/written-memories-understanding-deriving-and-extending-the-lstm.html&#34;&gt;recurrent neural networks&lt;/a&gt;, so I won&amp;rsquo;t explain how they work here.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-model&#34;&gt;The Model&lt;/h2&gt;
+
+&lt;p&gt;The model takes as input a document, and a &amp;lsquo;cloze-style&amp;rsquo; query which is a sentence with a word missing. The output of the model is a prediction to fill the blank in the query.&lt;/p&gt;
+
+&lt;h3 id=&#34;bidirectional-gru-for-encoding-the-document-and-query&#34;&gt;Bidirectional GRU for encoding the document and query&lt;/h3&gt;
+
+&lt;p&gt;The document and query are split into tokens, given a unique id, and then used to train word embeddings.
+A common use of RNNs in NLP is for collapsing a sequence into a single vector.
+We hope that this vector encodes the meaning of the sentence in some high-dimensional space such that we can do interesting things with it!
+Many papers, including this one, use bidirectional RNNs in oder to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.&lt;/p&gt;
+
+&lt;h3 id=&#34;attentive-query-glimpses&#34;&gt;Attentive query glimpses&lt;/h3&gt;
+
+&lt;p&gt;The encoded query vectors are used to generate a &lt;em&gt;glimpse&lt;/em&gt; of the query as a whole.
+The trick with this paper, is to build two attention distributions, one over the document, and one over the query.
+The document attention and query attention distributions represent the likelhood of each token being useful to predicting the answer.
+An additional novel feature is to iteratively reconstruct query and document glimpses rather than performing a single pass.
+The network alternates between glimpsing at the query, and using the information gleaned to create a document glimpse.
+The idea being that many inference problems require more than one logical hop. Then the document glimpse at time t is defined,&lt;/p&gt;
+
+&lt;p&gt;$$\mathbf{d}_t = \sum_{i} d_{i,t} \mathbf{\tilde{d}}_{t}$$&lt;/p&gt;
+
+&lt;p&gt;This acts like an approximation of the expected value of this document attention distribution.
+Although it doesn&amp;rsquo;t output samples from the distribution, it produces a new vector positioned near the mode of the attentions.
+We hope that this lets the network exploit the linear structure of the embedding space and enable these glimpse vectors to capture the most important properties of the query/document.&lt;/p&gt;
+
+&lt;p&gt;In order for the network to parameterize and control these glimpses, the network maintains a &lt;em&gt;context&lt;/em&gt; vector.
+This is the same as the thought vectors mentioned above, and is implemented again as a GRU.
+This controls the query and document glimpses over the iterations.
+Finally, the last document attention distribution is used to compute the prediction.
+By summing over each word (words appear multiple times) we get the total likelihood of that word being the answer, and the highest probability is the network&amp;rsquo;s prediction.&lt;/p&gt;
+
+&lt;h2 id=&#34;training&#34;&gt;Training&lt;/h2&gt;
+
+&lt;p&gt;Below is a picture from TensorBoard of the likelihood that the network has assigned to the correct answer. The x-axis is the probability [0,1], the y-axis is the density (ie. over the number of examples in that batch), and the z-axis is the training step.&lt;/p&gt;
+
+&lt;p&gt;You can see as the training proceeds (from back to front), the likelihood distribution for the answer shifts from near-zero to near one, demonstrating the improvement over time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nathanschucher.com/img/answer_probability.png&#34; alt=&#34;Likelihood of Answer vs. Time&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;My implementation acheived 65% accuracy on the Children&amp;rsquo;s Book Test (Named Entity) test set, compared to the paper&amp;rsquo;s 68.6%. This was after ~8 epochs, after which the validation loss started to increase. There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights.&lt;/p&gt;
+
 &lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
 
-&lt;p&gt;I want to apply this model (since it&amp;rsquo;s already done) to the other datasets in the original paper: there is a CNN news dataset, Facebook&amp;rsquo;s bAbI tasks, and a new huge NewsQA dataset. I&amp;rsquo;m also interested in trying to apply &lt;a href=&#34;https://arxiv.org/abs/1603.08983&#34;&gt;Adaptive Computation Time&lt;/a&gt;, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism actually works.&lt;/p&gt;
+&lt;p&gt;I want to apply this model to the other datasets in the original paper: there is a CNN news dataset, Facebook&amp;rsquo;s bAbI tasks, and a new huge NewsQA dataset. I&amp;rsquo;m also interested in trying to apply &lt;a href=&#34;https://arxiv.org/abs/1603.08983&#34;&gt;Adaptive Computation Time&lt;/a&gt;, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism works.&lt;/p&gt;
 </description>
     </item>
     
