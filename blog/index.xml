@@ -94,7 +94,7 @@ There are a few things missing from my implementation, including proper orthogon
 
 &lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
 
-&lt;p&gt;I want to apply this model to the other datasets in the original paper: there is a CNN news dataset, Facebook&amp;rsquo;s bAbI tasks, and a new huge NewsQA dataset. I&amp;rsquo;m also interested in trying to apply &lt;a href=&#34;https://arxiv.org/abs/1603.08983&#34;&gt;Adaptive Computation Time&lt;/a&gt;, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism works.&lt;/p&gt;
+&lt;p&gt;I want to apply this model to the other datasets in the original paper: Facebook&amp;rsquo;s bAbI tasks, DeepMinds CNN news dataset along with Maluuba&amp;rsquo;s additional question/answer data. I&amp;rsquo;m also interested in trying to apply &lt;a href=&#34;https://arxiv.org/abs/1603.08983&#34;&gt;Adaptive Computation Time&lt;/a&gt;, which allows an RNN to decide when to halt, rather than using a fixed number of iterations. It seems obvious to me that certain examples will be more difficult than others. Giving the network the ability to halt would allow it to take more computation time on more difficult examples, and maybe give more insight into how the glimpse mechanism works.&lt;/p&gt;
 </description>
     </item>
     
