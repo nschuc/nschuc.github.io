@@ -6,8 +6,98 @@
     <description>Recent content on Nathan Schucher</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 11 Jan 2017 16:31:57 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 25 Jan 2017 15:30:59 -0500</lastBuildDate>
     <atom:link href="https://nathanschucher.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>probability theory as an extension of Aristotelian logic</title>
+      <link>https://nathanschucher.com/blog/probability-theory-as-an-extension-of-aristotelian-logic/</link>
+      <pubDate>Wed, 25 Jan 2017 15:30:59 -0500</pubDate>
+      
+      <guid>https://nathanschucher.com/blog/probability-theory-as-an-extension-of-aristotelian-logic/</guid>
+      <description>
+
+&lt;p&gt;Probability has always been a bit of a mystery to me. Manipulating basic probabilities according to the axioms of probability is fine. Venn diagrams representing joint distributions is fine. Reasoning about continuous probability is fine. The calculations and algebra all makes sense, but I never got it. Probability Theory: The Logic of Science by Edward Jaynes starts from the ground up in a way that makes sense to me. Not only because it has so far avoided measure theory and infinite sets, but also because the goal is to design a robot that can reason (I think that&amp;rsquo;s pretty rad).&lt;/p&gt;
+
+&lt;h1 id=&#34;aristotelian-logic&#34;&gt;Aristotelian Logic&lt;/h1&gt;
+
+&lt;p&gt;Jaynes argues for development of a system of probability that acts as an extension of Aristotelian logic rather than infinite set theory.&lt;/p&gt;
+
+&lt;p&gt;Aristotelian Logic consists of propositions \(\{A, B, C, .. \}\) and premises ‘if A then B’ which can be acted upon by two arguments:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Major Premise: If A is true then B is true&lt;/p&gt;
+
+&lt;p&gt;Minor Premise: A is true&lt;/p&gt;
+
+&lt;p&gt;Conclusion: B is true&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Or&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Major Premise: If A is true then B is true&lt;/p&gt;
+
+&lt;p&gt;Minor Premise: B is false&lt;/p&gt;
+
+&lt;p&gt;Conclusion: A is false&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;However, how do we quantify the argument&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Major Premise: If A is true then B is true&lt;/p&gt;
+
+&lt;p&gt;Minor Premise: B is true&lt;/p&gt;
+
+&lt;p&gt;Conclusion: B is more plausible&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;How much more plausible is B, not that we know A? Real numbers can be used to quantify this, so we need a robot that can reason about propositions (A, B, C, …), and their relative plausibilities:&lt;/p&gt;
+
+&lt;h1 id=&#34;degree-of-plausibility-are-represented-by-real-numbers&#34;&gt;Degree of plausibility are represented by real numbers&lt;/h1&gt;
+
+&lt;p&gt;We would to assign a real number representing the plausibility that a proposition A is true given the knowledge that B is true. This is denoted&lt;/p&gt;
+
+&lt;p&gt;$$ A | B $$&lt;/p&gt;
+
+&lt;p&gt;And is pronounced ‘A given B’. This is a real number! It is not a probability, it is not in \([0, 1]\): in fact we know nothing about it other than that it is a real number.&lt;/p&gt;
+
+&lt;h1 id=&#34;qualitative-correspondence-with-common-sense&#34;&gt;Qualitative correspondence with common sense&lt;/h1&gt;
+
+&lt;p&gt;We then &lt;em&gt;choose&lt;/em&gt; to view larger real numbers as representing a higher degree of plausibility. This is an intuitive and natural choice, but is not necessary. We also would like consistency with the rules of Boolean logic: eg. A+B|C represents the plausibility that at least one of A or B is true given C.&lt;/p&gt;
+
+&lt;p&gt;As for correspondence with common sense, for example: if C’ represents new information built upon C, then&lt;/p&gt;
+
+&lt;p&gt;$$(A|C&amp;#39;) &amp;gt; (A|C)$$
+we expect
+$$(AB|C&amp;#39;) &amp;gt; (AB|C)$$
+so long as
+$$(B|C&amp;#39;) = (B|C)$$&lt;/p&gt;
+
+&lt;h2 id=&#34;consistency&#34;&gt;Consistency&lt;/h2&gt;
+
+&lt;p&gt;Jaynes posits the following consistency axioms for the robot:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If a conclusion can be reasoned out in more than one way, then every possible way must lead to the same result.&lt;/p&gt;
+
+&lt;p&gt;The robot always takes into account all of the evidence it has relevant to a question. It does not arbitrarily ignore some of the information, basing its conclusions only on what remains. In other words, the robot is completely non-ideological.&lt;/p&gt;
+
+&lt;p&gt;The robot always represents equivalent states of knowledge by equivalent plausibility assignments. That is, if in two problems the robot’s state of knowledge is the same (except perhaps for the labeling of the propositions), then it must assign the same plausibilities in both.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;And that’s all. The previous desiderata about common sense, and real numbers, along with these consistency guarantees are enough to develop a mathematical theory of plausible reasoning (ie. probability theory). Notice there is no mention of the familiar axioms of probability theory. Although this is a different formulation, Jaynes insists that he (and theory) agree with Kolmogorov&amp;rsquo;s results without any of the messiness of measure theory and infinite paradoxy.&lt;/p&gt;
+
+&lt;h1 id=&#34;what-about-p-x&#34;&gt;What about \(P(x)\)?&lt;/h1&gt;
+
+&lt;p&gt;Through some relatively straightforward derivation (and references to exhaustive proofs) Jaynes develops the rules of probability that are familiar. For example, we might like to know what (AB|C) is, and the solution involves finding a solution to the equation&lt;/p&gt;
+
+&lt;p&gt;$$ (AB|C) = F[(B|C), (A|BC)] $$&lt;/p&gt;
+
+&lt;p&gt;This is all in the first two chapters of the book. The rest goes onto develop familiar distributions and techniques using this robot I’m still working through it, but the basic premise is compelling.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>alternating neural attention for machine reading</title>

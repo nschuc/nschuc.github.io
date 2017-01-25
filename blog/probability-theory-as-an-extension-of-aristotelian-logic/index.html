@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="I make things with code some of the time">
+
+<base href="https://nathanschucher.com/">
+<title>
+
+
+     probability theory as an extension of Aristotelian logic 
+
+</title>
+<link rel="canonical" href="https://nathanschucher.com/blog/probability-theory-as-an-extension-of-aristotelian-logic/">
+
+
+<script type="text/javascript">
+    var baseURL = 'https:\/\/nathanschucher.com\/';
+    var host = baseURL.substring(0, baseURL.length - 1).replace(/\//g, '');
+    if ((host === window.location.host) && (window.location.protocol !== 'https:')) {
+        window.location.protocol = 'https:';
+    }
+</script>
+
+
+
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+<link href="https://fonts.googleapis.com/css?family=Cormorant:500|Lato" rel="stylesheet">
+
+
+
+
+    
+    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1485378438">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1485378438">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1485378438">
+    
+        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1485378438">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="https://nathanschucher.com/img/leaf.ico"
+
+>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
+
+
+
+
+</head>
+
+
+<body lang="en">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+              <div class="avatar-container">
+                <a href="https://nathanschucher.com/"><img class="avatar" src="https://nathanschucher.com/img/profile.jpg" /></a>
+              </div>
+            
+            <nav>
+                <a href="https://nathanschucher.com/"><div class="name">Nathan Schucher</div></a>
+                
+                <h3 class="self-intro">look at this guy, drinking his coffee; please hire or admit to graduate school</h3>
+                
+                <ul>
+                    <a href="https://nathanschucher.com/blog/"><li>Blog</li></a>
+                    <a href="https://nathanschucher.com/about/"><li>About</li></a>
+                    <a href="https://nathanschucher.com/resume.pdf"><li>Resume</li></a>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+            <a href="//github.com/nschuc" target="_blank"><img class="icon" src="https://nathanschucher.com/img/github.svg" alt="github" /></a>
+        
+
+        
+            <a href="//twitter.com/nschucher" target="_blank"><img class="icon" src="https://nathanschucher.com/img/twitter.svg" alt="twitter" /></a>
+        
+
+        
+            <a href="//www.linkedin.com/in/nathan-schucher-89905460" target="_blank"><img class="icon" src="https://nathanschucher.com/img/linkedin.svg" alt="linkedin" /></a>
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://nathanschucher.com/index.xml"><img class="icon" src="https://nathanschucher.com/img/rss.svg" alt="rss" /></a>
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    probability theory as an extension of Aristotelian logic
+
+</div>
+
+                    <div class="initials"><a href="https://nathanschucher.com/"></a></div>
+                </div>
+                <div class="meta">
+                    <div class="date" title="Wed Jan 25 2017 15:30:59 EST">Jan 25, 2017</div>
+                    <div class="reading-time"><div class="middot"></div>4 minutes read</div>
+                </div>
+            </div>
+            <div class="markdown">
+                
+
+<p>Probability has always been a bit of a mystery to me. Manipulating basic probabilities according to the axioms of probability is fine. Venn diagrams representing joint distributions is fine. Reasoning about continuous probability is fine. The calculations and algebra all makes sense, but I never got it. Probability Theory: The Logic of Science by Edward Jaynes starts from the ground up in a way that makes sense to me. Not only because it has so far avoided measure theory and infinite sets, but also because the goal is to design a robot that can reason (I think that&rsquo;s pretty rad).</p>
+
+<h1 id="aristotelian-logic">Aristotelian Logic</h1>
+
+<p>Jaynes argues for development of a system of probability that acts as an extension of Aristotelian logic rather than infinite set theory.</p>
+
+<p>Aristotelian Logic consists of propositions \(\{A, B, C, .. \}\) and premises ‘if A then B’ which can be acted upon by two arguments:</p>
+
+<blockquote>
+<p>Major Premise: If A is true then B is true</p>
+
+<p>Minor Premise: A is true</p>
+
+<p>Conclusion: B is true</p>
+</blockquote>
+
+<p>Or</p>
+
+<blockquote>
+<p>Major Premise: If A is true then B is true</p>
+
+<p>Minor Premise: B is false</p>
+
+<p>Conclusion: A is false</p>
+</blockquote>
+
+<p>However, how do we quantify the argument</p>
+
+<blockquote>
+<p>Major Premise: If A is true then B is true</p>
+
+<p>Minor Premise: B is true</p>
+
+<p>Conclusion: B is more plausible</p>
+</blockquote>
+
+<p>How much more plausible is B, not that we know A? Real numbers can be used to quantify this, so we need a robot that can reason about propositions (A, B, C, …), and their relative plausibilities:</p>
+
+<h1 id="degree-of-plausibility-are-represented-by-real-numbers">Degree of plausibility are represented by real numbers</h1>
+
+<p>We would to assign a real number representing the plausibility that a proposition A is true given the knowledge that B is true. This is denoted</p>
+
+<p>$$ A | B $$</p>
+
+<p>And is pronounced ‘A given B’. This is a real number! It is not a probability, it is not in \([0, 1]\): in fact we know nothing about it other than that it is a real number.</p>
+
+<h1 id="qualitative-correspondence-with-common-sense">Qualitative correspondence with common sense</h1>
+
+<p>We then <em>choose</em> to view larger real numbers as representing a higher degree of plausibility. This is an intuitive and natural choice, but is not necessary. We also would like consistency with the rules of Boolean logic: eg. A+B|C represents the plausibility that at least one of A or B is true given C.</p>
+
+<p>As for correspondence with common sense, for example: if C’ represents new information built upon C, then</p>
+
+<p>$$(A|C&#39;) &gt; (A|C)$$
+we expect
+$$(AB|C&#39;) &gt; (AB|C)$$
+so long as
+$$(B|C&#39;) = (B|C)$$</p>
+
+<h2 id="consistency">Consistency</h2>
+
+<p>Jaynes posits the following consistency axioms for the robot:</p>
+
+<blockquote>
+<p>If a conclusion can be reasoned out in more than one way, then every possible way must lead to the same result.</p>
+
+<p>The robot always takes into account all of the evidence it has relevant to a question. It does not arbitrarily ignore some of the information, basing its conclusions only on what remains. In other words, the robot is completely non-ideological.</p>
+
+<p>The robot always represents equivalent states of knowledge by equivalent plausibility assignments. That is, if in two problems the robot’s state of knowledge is the same (except perhaps for the labeling of the propositions), then it must assign the same plausibilities in both.</p>
+</blockquote>
+
+<p>And that’s all. The previous desiderata about common sense, and real numbers, along with these consistency guarantees are enough to develop a mathematical theory of plausible reasoning (ie. probability theory). Notice there is no mention of the familiar axioms of probability theory. Although this is a different formulation, Jaynes insists that he (and theory) agree with Kolmogorov&rsquo;s results without any of the messiness of measure theory and infinite paradoxy.</p>
+
+<h1 id="what-about-p-x">What about \(P(x)\)?</h1>
+
+<p>Through some relatively straightforward derivation (and references to exhaustive proofs) Jaynes develops the rules of probability that are familiar. For example, we might like to know what (AB|C) is, and the solution involves finding a solution to the equation</p>
+
+<p>$$ (AB|C) = F[(B|C), (A|BC)] $$</p>
+
+<p>This is all in the first two chapters of the book. The rest goes onto develop familiar distributions and techniques using this robot I’m still working through it, but the basic premise is compelling.</p>
+
+                <br>
+            </div>
+            <p><a href="https://nathanschucher.com/blog/">Back to posts</a></p>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-90175355-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  
+
+  <script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+  </script>
+
+
+
+
+  <script>renderMathInElement(document.body);</script>
+
+
+
+</body>
+</html>
+
