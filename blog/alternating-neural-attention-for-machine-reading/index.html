@@ -43,11 +43,11 @@
 
 
     
-    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1485378438">
-    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1485378438">
-    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1485378438">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/reset.css?t=1485797263">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/pygments.css?t=1485797263">
+    <link rel="stylesheet" href="https://nathanschucher.com/css/main.css?t=1485797263">
     
-        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1485378438">
+        <link rel="stylesheet" href="https://nathanschucher.com/css/override.css?t=1485797263">
     
 
 
@@ -158,7 +158,7 @@
 
 <p>“Please caregiver, tell me what X represents in this sentence, ‘Yes,’ said X, ‘all the jungle fear Bagheera&ndash;all except Mowgli.’”</p>
 
-<p>The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you know. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.</p>
+<p>The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you encountered in your training set. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.</p>
 
 <h2 id="story-mode">Story Mode</h2>
 
@@ -194,7 +194,7 @@ There are a <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
 <p>The document and query are split into tokens, given a unique id, and then used to train word embeddings.
 A common use of RNNs in NLP is for collapsing a sequence into a single vector.
 We hope that this vector encodes the meaning of the sentence in some high-dimensional space such that we can do interesting things with it!
-Many papers, including this one, use bidirectional RNNs in oder to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.</p>
+Many papers, including this one, use bidirectional RNNs in order to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.</p>
 
 <h3 id="attentive-query-glimpses">Attentive query glimpses</h3>
 
@@ -228,6 +228,10 @@ By summing over each word (words appear multiple times) we get the total likelih
 <p>My implementation acheived 65% accuracy on the Children&rsquo;s Book Test (Named Entity) test set, compared to the paper&rsquo;s 68.6%.
 This was after ~8 epochs, after which the validation loss started to increase.
 There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights, <a href="http://blog.dennybritz.com/2017/01/17/engineering-is-the-bottleneck-in-deep-learning-research/">but undoubtedly much more</a>.</p>
+
+<p>If you play around with the &ldquo;Story Mode&rdquo; section above, you may notice that the distribution doesn&rsquo;t change <em>that</em> much, especially the query distribution.</p>
+
+<p>I was anticipating a more dramatic change in distribution as the network alternates glimpses, but it seems to immediately latch on to names and proper nouns. My initial guess is that the network memorizes those entities because they&rsquo;ve read parts of the same stories in the training set. This is a rather large problem, and so these results can&rsquo;t really demonstrate generalization.</p>
 
 <h2 id="what-s-next">What&rsquo;s next</h2>
 

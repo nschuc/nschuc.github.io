@@ -17,7 +17,7 @@
       <guid>https://nathanschucher.com/blog/probability-theory-as-an-extension-of-aristotelian-logic/</guid>
       <description>
 
-&lt;p&gt;Probability has always been a bit of a mystery to me. Manipulating basic probabilities according to the axioms of probability is fine. Venn diagrams representing joint distributions is fine. Reasoning about continuous probability is fine. The calculations and algebra all makes sense, but I never got it. Probability Theory: The Logic of Science by Edward Jaynes starts from the ground up in a way that makes sense to me. Not only because it has so far avoided measure theory and infinite sets, but also because the goal is to design a robot that can reason (I think that&amp;rsquo;s pretty rad).&lt;/p&gt;
+&lt;p&gt;Probability has always been a bit of a mystery to me. Manipulating basic probabilities according to the axioms of probability is fine. Venn diagrams representing joint distributions is fine. Reasoning about continuous probability is&amp;hellip; fine. The calculations and algebra all makes sense, but I never got it. Probability Theory: The Logic of Science by Edward Jaynes starts from the ground up in a way that makes sense to me. Not only because it has so far avoided measure theory and infinite sets, but also because the goal is to design a robot that can reason (I think that&amp;rsquo;s pretty rad).&lt;/p&gt;
 
 &lt;h1 id=&#34;aristotelian-logic&#34;&gt;Aristotelian Logic&lt;/h1&gt;
 
@@ -111,7 +111,7 @@ $$(B|C&amp;#39;) = (B|C)$$&lt;/p&gt;
 
 &lt;p&gt;“Please caregiver, tell me what X represents in this sentence, ‘Yes,’ said X, ‘all the jungle fear Bagheera&amp;ndash;all except Mowgli.’”&lt;/p&gt;
 
-&lt;p&gt;The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you know. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.&lt;/p&gt;
+&lt;p&gt;The child has carefully worded the query in this manner because you are not you, you are a Childcare Robot, and this is the only type of query you encountered in your training set. You respond, “Mowgli,” and the child nods knowingly and smiles. You twist your robo-face into your best imitation of a human smile.&lt;/p&gt;
 
 &lt;h2 id=&#34;story-mode&#34;&gt;Story Mode&lt;/h2&gt;
 
@@ -147,7 +147,7 @@ There are a &lt;a href=&#34;http://colah.github.io/posts/2015-08-Understanding-L
 &lt;p&gt;The document and query are split into tokens, given a unique id, and then used to train word embeddings.
 A common use of RNNs in NLP is for collapsing a sequence into a single vector.
 We hope that this vector encodes the meaning of the sentence in some high-dimensional space such that we can do interesting things with it!
-Many papers, including this one, use bidirectional RNNs in oder to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.&lt;/p&gt;
+Many papers, including this one, use bidirectional RNNs in order to capture both the left-to-right semantics and the right-to-left. In this case the outputs of the forward and backward pass are concatenated.&lt;/p&gt;
 
 &lt;h3 id=&#34;attentive-query-glimpses&#34;&gt;Attentive query glimpses&lt;/h3&gt;
 
@@ -181,6 +181,10 @@ By summing over each word (words appear multiple times) we get the total likelih
 &lt;p&gt;My implementation acheived 65% accuracy on the Children&amp;rsquo;s Book Test (Named Entity) test set, compared to the paper&amp;rsquo;s 68.6%.
 This was after ~8 epochs, after which the validation loss started to increase.
 There are a few things missing from my implementation, including proper orthogonal initialization of the GRU weights, &lt;a href=&#34;http://blog.dennybritz.com/2017/01/17/engineering-is-the-bottleneck-in-deep-learning-research/&#34;&gt;but undoubtedly much more&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you play around with the &amp;ldquo;Story Mode&amp;rdquo; section above, you may notice that the distribution doesn&amp;rsquo;t change &lt;em&gt;that&lt;/em&gt; much, especially the query distribution.&lt;/p&gt;
+
+&lt;p&gt;I was anticipating a more dramatic change in distribution as the network alternates glimpses, but it seems to immediately latch on to names and proper nouns. My initial guess is that the network memorizes those entities because they&amp;rsquo;ve read parts of the same stories in the training set. This is a rather large problem, and so these results can&amp;rsquo;t really demonstrate generalization.&lt;/p&gt;
 
 &lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
 
