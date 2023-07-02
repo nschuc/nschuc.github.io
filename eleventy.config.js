@@ -23,6 +23,8 @@ module.exports = function(eleventyConfig) {
 
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
+	eleventyConfig.addWatchTarget("content/**/*.js");
+	eleventyConfig.addWatchTarget("public/**/*.css");
 
 	// App plugins
 	eleventyConfig.addPlugin(pluginDrafts);
@@ -38,6 +40,21 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(pluginBundle);
 
 	// Filters
+
+	// esbuild js bundler
+	eleventyConfig.addFilter("jsbundle", (code) => {
+		require('fs').writeFileSync('in.js', code)
+		require('esbuild').buildSync({
+		  entryPoints: ['in.js'],
+		  outfile: 'out.js',
+		  minify: true,
+		  bundle: true,
+		})
+		const bundle = require('fs').readFileSync('out.js', 'utf8')
+		return bundle
+	  })
+	  
+
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
 		// Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 		return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(format || "dd LLLL yyyy");
