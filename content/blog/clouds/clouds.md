@@ -2,7 +2,6 @@
 title: clouds
 description: some p5js clouds
 date: 2023-07-02
-draft: true
 tags:
   - generative art
 ---
